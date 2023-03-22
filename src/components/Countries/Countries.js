@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Country from "../Country/Country";
+import Country from "./Country/Country";
+import "./Countries.css";
 
-const LoadCountries = () => {
+const Countries = () => {
   const [countries, setCountries] = useState([]);
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/all`)
@@ -12,11 +13,13 @@ const LoadCountries = () => {
     <div>
       <h1>Visiting Every country of the world!!</h1>
       <h3>Available Countries: {countries.length}</h3>
-      {countries.map((country) => (
-        <Country name={country.name.common} population={country.population} />
-      ))}
+      <div className="countries-container">
+        {countries.map((country) => (
+          <Country key={country.cca3} country={country} />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default LoadCountries;
+export default Countries;
